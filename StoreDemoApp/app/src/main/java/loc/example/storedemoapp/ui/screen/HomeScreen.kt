@@ -72,7 +72,7 @@ fun HomeScreen(uiState: HomeUiState, modifier: Modifier = Modifier) {
 
 @Composable
 fun DeliveryCard(modifier: Modifier = Modifier) {
-    Card(modifier = Modifier.fillMaxWidth()) {
+    Card(modifier = modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(horizontal = 24.dp, vertical = 32.dp)) {
             Text(
                 text = "Snacks, pizza, beer, and more in just a tap",
@@ -101,7 +101,7 @@ fun DeliveryCard(modifier: Modifier = Modifier) {
 
 @Composable
 fun RecommendedDeals(items: List<Product>, modifier: Modifier = Modifier) {
-    Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+    Row(modifier = modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Text(
             "Recommended Deals",
             style = MaterialTheme.typography.titleMedium,
