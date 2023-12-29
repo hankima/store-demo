@@ -97,7 +97,6 @@ fun DemoStoreApp(
     Scaffold(
         topBar = {
             StoreTopBar(
-                username = uiState.username,
                 title = navTitle,
                 canNavigateUp = prevBackStack != null,
                 onNavClick = { navController.navigateUp() },
@@ -196,11 +195,10 @@ fun DemoStoreApp(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StoreTopBar(
-    username: String,
     title: String,
     canNavigateUp: Boolean,
     onNavClick: () -> Unit,
-    actions: @Composable RowScope.() -> Unit
+    actions: @Composable() (RowScope.() -> Unit)
 ) {
     TopAppBar(title = {
 //        Heading(username = username)
