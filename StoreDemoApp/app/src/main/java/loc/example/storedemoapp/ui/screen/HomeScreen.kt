@@ -22,7 +22,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,33 +38,24 @@ import coil.compose.rememberAsyncImagePainter
 import com.google.gson.Gson
 import loc.example.storedemoapp.R
 import loc.example.storedemoapp.data.FakeData
-import loc.example.storedemoapp.model.HomeUiState
 import loc.example.storedemoapp.model.Product
 import loc.example.storedemoapp.ui.theme.StoreDemoAppTheme
 
 @Composable
-fun HomeScreen(uiState: HomeUiState, modifier: Modifier = Modifier) {
-    StoreDemoAppTheme {
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = modifier,
-            color = MaterialTheme.colorScheme.background
+fun HomeScreen(products: List<Product>, isLoading: Boolean, modifier: Modifier = Modifier) {
+    if (isLoading) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = modifier.fillMaxSize()
         ) {
-            if (uiState.isLoading) {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    CircularProgressIndicator(modifier = Modifier.size(size = 64.dp))
-                }
-            } else {
-                Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    DeliveryCard()
-                    Spacer(modifier = Modifier.height(8.dp))
-                    RecommendedDeals(items = uiState.recommendedDeals)
-                }
-            }
+            CircularProgressIndicator(modifier = Modifier.size(size = 64.dp))
+        }
+    } else {
+        Column(modifier = modifier.padding(horizontal = 16.dp)) {
+            Spacer(modifier = Modifier.height(8.dp))
+            DeliveryCard()
+            Spacer(modifier = Modifier.height(8.dp))
+            RecommendedDeals(items = products)
         }
     }
 }
@@ -190,11 +180,8 @@ fun HomeScreenPreview() {
     StoreDemoAppTheme {
         val ctx = LocalContext.current
         val gson = Gson()
-        val uiState = HomeUiState(
-            isLoading = false,
-            recommendedDeals = FakeData.getRecommendedDeals(ctx, gson)
-        )
-        HomeScreen(uiState = uiState)
+        val products = FakeData.getRecommendedDeals(ctx, gson)
+        HomeScreen(products = products, isLoading = false)
     }
 }
 

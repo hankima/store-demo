@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">Store Demo App</string>
     <string name="savings">SAVINGS</string>
-    <string name="location">Find store</string>
+    <string name="location">Find Store</string>
+    <string name="account">My Account</string>
     <string name="home">Home</string>
     <string name="order">Order</string>
     <string name="reward">Rewards</string>
     <string name="fuel">Fuel</string>
     <string name="discover">Discover</string>
     <string name="greeting">Hi %s!</string>
+    <string name="back_button">Back</string>
 </resources>
